@@ -30,10 +30,10 @@
     "vue-swatches": "^2.1.1",
 		"@nuxtjs/style-resources": "^1.0.0",
 		"fibers": "^5.0.0",
-		"node-sass": "^5.0.0",
-		"sass": "^1.32.4",
 		"sass-loader": "^10.1.1"
   },
   "devDependencies": {
+		"node-sass": "^5.0.0",
+		"sass": "^1.32.4"
   }
 }
