@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "npm run build && nuxt start -p 8083",
     "generate": "nuxt generate",
-		"caprover": "npm run build && git add . && git commit -m \"Admin update\" && git push"
+		"caprover": "git add . && git commit -m \"Admin update\" && git push"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
@@ -16,7 +16,6 @@
     "crypto-js": "^4.0.0",
     "dayjs": "^1.10.4",
     "fs": "0.0.1-security",
-    "kladrapi-for-node": "0.0.2",
     "lodash": "^4.17.21",
     "net": "^1.0.2",
     "nuxt": "^2.14.12",
@@ -29,12 +28,12 @@
     "rgbaster": "^2.1.1",
     "tls": "0.0.1",
     "vue-swatches": "^2.1.1",
-		"@nuxtjs/style-resources": "^1.0.0"
+		"@nuxtjs/style-resources": "^1.0.0",
+		"fibers": "^5.0.0",
+		"node-sass": "^5.0.0",
+		"sass": "^1.32.4",
+		"sass-loader": "^10.1.1"
   },
   "devDependencies": {
-    "fibers": "^5.0.0",
-    "node-sass": "^5.0.0",
-    "sass": "^1.32.4",
-    "sass-loader": "^10.1.1"
   }
 }
