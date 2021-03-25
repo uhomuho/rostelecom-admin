@@ -50,10 +50,10 @@ export default {
 	},
 
 	buildModules: [
-		'@nuxtjs/style-resources',
 		'nuxt-compress'
 	],
 	modules: [
+		'@nuxtjs/style-resources',
 		'@nuxtjs/axios',
 		'@nuxtjs/dayjs',
 		'vue-swatches/nuxt',
