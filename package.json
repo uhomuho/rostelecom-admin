@@ -28,10 +28,10 @@
     "pug-plain-loader": "^1.1.0",
     "rgbaster": "^2.1.1",
     "tls": "0.0.1",
-    "vue-swatches": "^2.1.1"
+    "vue-swatches": "^2.1.1",
+		"@nuxtjs/style-resources": "^1.0.0"
   },
   "devDependencies": {
-    "@nuxtjs/style-resources": "^1.0.0",
     "fibers": "^5.0.0",
     "node-sass": "^5.0.0",
     "sass": "^1.32.4",
