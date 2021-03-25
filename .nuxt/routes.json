@@ -1,0 +1,72 @@
+[
+  {
+    "name": "packages",
+    "path": "/packages",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/packages/index.vue",
+    "chunkName": "pages/packages/index",
+    "_name": "_977f536a"
+  },
+  {
+    "name": "regiones",
+    "path": "/regiones",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/regiones/index.vue",
+    "chunkName": "pages/regiones/index",
+    "_name": "_325269c0"
+  },
+  {
+    "name": "services",
+    "path": "/services",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/services/index.vue",
+    "chunkName": "pages/services/index",
+    "_name": "_a50d8f08"
+  },
+  {
+    "name": "tariffs",
+    "path": "/tariffs",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/tariffs/index.vue",
+    "chunkName": "pages/tariffs/index",
+    "_name": "_22376147"
+  },
+  {
+    "name": "packages-create",
+    "path": "/packages/create",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/packages/create/index.vue",
+    "chunkName": "pages/packages/create/index",
+    "_name": "_e7674bd4"
+  },
+  {
+    "name": "tariffs-add",
+    "path": "/tariffs/add",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/tariffs/add/index.vue",
+    "chunkName": "pages/tariffs/add/index",
+    "_name": "_92235a4e"
+  },
+  {
+    "name": "packages-id",
+    "path": "/packages/:id",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/packages/_id/index.vue",
+    "chunkName": "pages/packages/_id/index",
+    "_name": "_69c15894"
+  },
+  {
+    "name": "services-id",
+    "path": "/services/:id",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/services/_id/index.vue",
+    "chunkName": "pages/services/_id/index",
+    "_name": "_486c9532"
+  },
+  {
+    "name": "tariffs-id",
+    "path": "/tariffs/:id",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/tariffs/_id/index.vue",
+    "chunkName": "pages/tariffs/_id/index",
+    "_name": "_006080b2"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_36e99487"
+  }
+]

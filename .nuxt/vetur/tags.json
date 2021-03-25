@@ -1,0 +1,44 @@
+{
+  "AddCity": {
+    "description": "Auto imported from components/add/City.vue"
+  },
+  "AddService": {
+    "description": "Auto imported from components/add/Service.vue"
+  },
+  "TableAreas": {
+    "description": "Auto imported from components/tables/Areas.vue"
+  },
+  "TablePackages": {
+    "description": "Auto imported from components/tables/Packages.vue"
+  },
+  "TableServices": {
+    "description": "Auto imported from components/tables/Services.vue"
+  },
+  "TableTariffs": {
+    "description": "Auto imported from components/tables/Tariffs.vue"
+  },
+  "TariffsPreview": {
+    "description": "Auto imported from components/tariffs/Preview.vue"
+  },
+  "TariffsService": {
+    "description": "Auto imported from components/tariffs/Service.vue"
+  },
+  "TariffsView": {
+    "description": "Auto imported from components/tariffs/View.vue"
+  },
+  "PackagesTariff": {
+    "description": "Auto imported from components/packages/Tariff.vue"
+  },
+  "Aside": {
+    "description": "Auto imported from components/Aside.vue"
+  },
+  "Auth": {
+    "description": "Auto imported from components/Auth.vue"
+  },
+  "Header": {
+    "description": "Auto imported from components/Header.vue"
+  },
+  "TopLine": {
+    "description": "Auto imported from components/TopLine.vue"
+  }
+}
