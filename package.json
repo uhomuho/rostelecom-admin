@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "PORT=9000 nuxt",
     "build": "nuxt build",
-    "start": "npm run build && nuxt start -p 8083",
+    "start": "nuxt start -p 8083",
     "generate": "nuxt generate",
-		"caprover": "git add . && git commit -m \"Admin update\" && git push"
+		"caprover": "npm run build && git add . && git commit -m \"Admin update\" && git push"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
