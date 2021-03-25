@@ -1,0 +1,15 @@
+.vue-swatches {
+	display: flex;
+}
+
+.table_packages {
+	.tariffs {
+		@include flex(flex-start, flex-start);
+		flex-wrap: wrap;
+		.tariff {
+			&+.tariff {
+				margin-left: .5rem;
+			}
+		}
+	}
+}

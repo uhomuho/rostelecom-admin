@@ -1,0 +1,44 @@
+@mixin flex($align: center, $justify: center, $direction: row) {
+	display: flex;
+	align-items: $align;
+	justify-content: $justify;
+	flex-direction: $direction;
+}
+
+@mixin _tooltip($background, $color) {
+	.tooltip-content {
+		color: $color;
+		background: $background;
+		&::before {
+			border-right: 5px solid $background;
+		}
+	}
+}
+
+@mixin _scrollbar($width_chr: 2px, $width_moz: thin, $color: $grey) {
+	overflow: scroll;
+	scrollbar-color: $color transparent;
+	scrollbar-width: $width_moz;
+	
+	&::-webkit-scrollbar {
+		width: $width_chr;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: $color;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background: rgba($color, .8);
+	}
+}
+
+@mixin _grid($count, $gap: 1rem) {
+	display: grid;
+	grid-template-columns: repeat($count, 1fr);
+	gap: $gap;
+}

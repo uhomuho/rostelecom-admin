@@ -1,0 +1,30 @@
+@import "~bulma/sass/utilities/_all";
+
+$primary: #70f;
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+$custom-colors: null !default;
+
+$section-paddding-vertical: 3rem;
+$section-paddding-horizontal: 1.5rem;
+$section-padding: $section-paddding-vertical $section-paddding-horizontal;
+
+$input-focus-box-shadow-color: rgba($primary, .25);
+
+$table-sticky-header-height: 450px;
+
+$colors: mergeColorMaps(
+	(
+		"primary": (
+			$primary,
+			$primary-invert,
+			$primary-light,
+			$primary-dark,
+		)
+	),
+	$custom-colors
+);
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

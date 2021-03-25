@@ -1,0 +1,11 @@
+// Components
+@import "./components/aside";
+@import "./components/services-table";
+@import "./buefy";
+@import "./style";
+
+body {
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	font-display: swap;
+	background: #f8f8f8;
+}
