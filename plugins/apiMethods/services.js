@@ -1,22 +1,9 @@
-export default ({ $axios, $Snackbar }, inject) => {
+export default ({ $axios, $Snackbar, $query }, inject) => {
 	inject('addService', service => {
-		let formData = new FormData()
-		formData.append('files', service.icon)
-		formData.append('files', service.darkIcon)
-		delete service.icon
-		for (let key in service) {
-			if (typeof service[key] == 'object') {
-				for (let y in service[key]) {
-					formData.append(`${key}_${y}`, service[key][y])
-				}
-			} else {
-				formData.append(key, service[key])
-			}
-		}
-
-		return $axios.post('/services', formData)
+		return $axios.post('/services', { service })
 			.then(({ data }) => {
 				$Snackbar(data.message)
+				return true
 			})
 	})
 	inject('getServices', query => {
@@ -28,6 +15,30 @@ export default ({ $axios, $Snackbar }, inject) => {
 			.then(res => res.data)
 	})
 	inject('deleteService', id => {
-		return $axios.post(`/services/${id}`)
+		return $axios.delete(`/services/${id}`)
+	})
+
+	inject('getSTypes', params => {
+		return $axios.get(`/services/types?${$query(params)}`)
+			.then(res => res.data)
+	})
+	inject('getSType', ({ id, params }) => {
+		return $axios.get(`/services/types/${id}?${$query(params)}`)
+			.then(res => res.data)
+	})
+	inject('removeSType', id => {
+		return $axios.delete(`/services/types/${id}`)
+	})
+	inject('addSType', type => {
+		let formData = new FormData()
+		formData.append('files', type.icon)
+		formData.append('files', type.darkIcon)
+		formData.append('name', type.name)
+
+		return $axios.post('/services/types', formData)
+			.then(({ data }) => {
+				$Snackbar(data.message)
+				return true
+			})
 	})
 }

@@ -1,22 +1,20 @@
 <template lang="pug">
 .services_table(v-if='services')
 	b-table(
+		v-if='types'
 		:data='services'
 		detailed
-		detail-key="id"
-		@details-open="row => $router.push(`/services/${row.id}`)")
+		detail-key="id")
 		b-table-column(
 			field="type"
 			label="Тип услуги"
 			v-slot='props')
-			p {{ props.row.type !== 5 ? $getType(props.row.type) : props.row.customType }}
+			p {{ types[props.row.type].name }}
 		b-table-column(
 			field="icon"
 			label="Иконка"
 			v-slot='props')
-			img( 
-				v-if='props.row.icon'
-				:src='props.row.icon' )
+			img( :src='types[props.row.type].icon' )
 		b-table-column(
 			field="name"
 			label="Название"
@@ -44,6 +42,31 @@
 				aria-close-label="Close tag"
 				@close="deleteService(props.row.id)")
 				|Удалить
+		template( #detail='props' )
+			table.table( v-if='props.row.connectionType' )
+				tbody
+					tr
+						td Тип подключения
+						td {{ props.row.connectionType }}
+			b-collapse.card(
+				animation="slide"
+				aria-id="collapse"
+				v-if='Object.keys(channels(props.row.channels)).length > 0'
+				v-for='(type, i) of channels(props.row.channels)'
+				:key='i'
+				:open='isOpen == i'
+				@open='isOpen = i')
+				template( #trigger='props' )
+					.card-header(
+						role="button"
+						aria-controls="collapse")
+						p.card-header-title {{ i }}
+						a.card-header-icon
+							b-icon( :icon="props.open ? 'angle-down' : 'angle-up'" )
+				.card-content
+					.content
+						ol
+							li( v-for='(channel, i) in type' ) {{ channel.name }}
 </template>
 
 <script>
@@ -53,12 +76,33 @@ export default {
 		services: {
 			type: Array,
 			default: null
+		},
+		types: {
+			type: Object,
+			default: null
+		}
+	},
+	data() {
+		return {
+			isOpen: null
 		}
 	},
 	methods: {
 		deleteService(id) {
 			this.$deleteService(id)
 				.then(() => this.$emit('updateServices'))
+		},
+		channels(channels) {
+			let result = {}
+
+			if (channels) {
+				for (let channel of channels) {
+					if (!result[channel.type]) result[channel.type] = []
+					result[channel.type].push(channel)
+				}
+			}
+
+			return result
 		}
 	}
 }

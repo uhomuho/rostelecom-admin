@@ -1,4 +1,4 @@
-export default ({ $Snackbar, $axios }, inject) => {
+export default ({ $Snackbar, $axios, $query }, inject) => {
 	inject('getCities', query => {
 		return $axios.get(`/areas/new?contentType=region&query=${query}`)
 			.then(res => res.data)
@@ -13,11 +13,18 @@ export default ({ $Snackbar, $axios }, inject) => {
 			})
 	})
 	inject('getAreas', params => {
-		let esc = encodeURIComponent,
-				query = params ? Object.keys(params)
-					.map(k => esc(k) + '=' + esc(params[k]))
-					.join('&') : ""
-		return $axios.get(`/areas?${query}`)
+		return $axios.get(`/areas?${$query(params)}`)
 			.then(res => res.data)
+	})
+	inject('getArea', id => {
+		return $axios.get(`/areas/${id}`)
+			.then(res => res.data)
+	})
+	inject('saveArea', area => {
+		return $axios.put('/areas', { area })
+			.then(({ data }) => {
+				$Snackbar(data.message)
+				return true
+			})
 	})
 }

@@ -1,8 +1,14 @@
 import cryptoJS from 'crypto-js'
 import moment from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+
+
+moment.extend(utc)
+moment.extend(timezone)
 
 const encoding = () => {
-	return `${moment().format('DD-HH+mm\\HH/MM/YYYY')}/${moment().format('YYYY/MM/DD-HH+mm\\HH')}/${moment().format('MM/YYYY/DD-HH+mm\\HH')}`
+	return `${moment().tz("Asia/Yekaterinburg").format('DD-HH+mm\\HH/MM/YYYY')}/${moment().tz("Asia/Yekaterinburg").format('YYYY/MM/DD-HH+mm\\HH')}/${moment().tz("Asia/Yekaterinburg").format('MM/YYYY/DD-HH+mm\\HH')}`
 }
 
 export default (context, inject) => {
@@ -15,7 +21,8 @@ export default (context, inject) => {
 					} else {
 						let bytes  = cryptoJS.AES.decrypt(string, encoding())
 						bytes = bytes.toString(cryptoJS.enc.Utf8)
-						resolve(JSON.parse(bytes))
+						bytes = bytes && bytes !== '' ? JSON.parse(bytes) : bytes
+						resolve(bytes && bytes !== '' ? JSON.parse(bytes) : {})
 					}
 				} else {
 					resolve(null)

@@ -26,6 +26,9 @@
 			v-slot='props')
 			a.tag.is-primary.is-light(
 				v-if='props.row.tariffs') Просмотр
+			nuxt-link.tag.is-primary(
+				v-else
+				:to='`/regiones/edit/${props.row.id}`') Добавить
 		b-table-column(
 			field="banners"
 			label="Баннеры"

@@ -1,4 +1,4 @@
-export default ({ $axios, $Snackbar }, inject ) => {
+export default ({ $axios, $Snackbar, $query }, inject ) => {
 	inject('createTariff', tariff => {
 		return $axios.post('/tariff/create', { tariff })
 			.then(({ data }) => {
@@ -7,7 +7,7 @@ export default ({ $axios, $Snackbar }, inject ) => {
 			})
 	})
 	inject('deleteTariff', id => {
-		return $axios.post(`/tariff/delete/${id}`)
+		return $axios.delete(`/tariff/${id}`)
 			.then(res => res.data)
 	})
 	inject('getTariff', id => {
@@ -15,12 +15,22 @@ export default ({ $axios, $Snackbar }, inject ) => {
 			.then(res => res.data)
 	})
 	inject('getTariffs',  params => {
-		let esc = encodeURIComponent,
-				query = params ? Object.keys(params)
-					.map(k => esc(k) + '=' + esc(params[k]))
-					.join('&') : ""
-
-		return $axios.get(`/tariff?${query}`)
+		return $axios.get(`/tariff?${$query(params)}`)
 			.then(res => res.data)
+	})
+
+	inject('getTTypes', params => {
+		return $axios.get(`/tariff/types?${$query(params)}`)
+			.then(res => res.data)
+	})
+	inject('addTType', type => {
+		return $axios.post('/tariff/types', { type })
+			.then(({ data }) => {
+				$Snackbar(data.message)
+				return true
+			})
+	})
+	inject('removeTType', id => {
+		return $axios.delete(`/tariff/types/${id}`)
 	})
 }

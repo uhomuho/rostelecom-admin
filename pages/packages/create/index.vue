@@ -1,18 +1,18 @@
 <template lang="pug">
 #create_package
 	TopLine(
-		title="Создать пакет")
+		title="Создать группу")
 	.tile.is-ancestor
 		.tile
 			.tile.is-parent
 				.tile.is-child.box
 					form.form(@submit.prevent='createPackage')
 						b-field(
-							label="Название пакета (необязательно)")
+							label="Название группы (необязательно)")
 							b-input(
 								v-model='package.name')
 						b-field(
-							label="Тарифы, входящие в пакет")
+							label="Тарифы, входящие в группу")
 							b-autocomplete(
 								field="name"
 								:data='resultTariffs'

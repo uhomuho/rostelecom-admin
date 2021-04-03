@@ -5,46 +5,51 @@
 	hr
 	code
 		.box
+			//- 
+			//- pre {{ types.indexOf(types.filter(item => item.id == 1)[0]) }}
+			//- pre {{ types }}
 			.head(
 				:class='{ light: tariff.fontColor == 1 }'
 				:style='`background: ${tariff.background}`')
+				.flag#flag( 
+					v-if='tariff.flagText'
+					:style='`background: ${tariff.flagColor}; color: ${tariff.flagTextColor == 0 ? "#363636" : "#fff"}`' ) {{ tariff.flagText }}
 				.content
-					h3 {{ tariff.name }}
+					h3#title {{ tariff.name }}
 				.media(
-					v-if='services.length > 0'
-					v-for='(service, i) in services')
+					v-if='types.length > 0'
+					v-for='({ id, name }, i) in types'
+					:class='{ single: serviceValue(id).length == 0 }')
 					.media-left
 						.wrapper(
-							:style='`background: ${service && service.icon_background ? service.icon_background : service && service.icon.includes("_dark") ? "#101828" : ""}`')
+							:style='`background: ${tariff.icons[id].background ? tariff.icons[id].background : tariff.icons[id].icon.includes("_dark") ? "#101828" : ""}`')
 							img(
-								:src='service ? service.icon : "https://dummyimage.com/80x80/000000/fff.png&text=icon"')
+								:src='tariff.icons[id].icon')
 					.media-content
 						.content
-							h5 {{ service ? service.title : result[i] }}
-							p.is-inline(v-if='service') {{ service.value }}
+							h5 {{ name }}
+							p.is-inline(v-if='serviceValue(id).length > 0') {{ serviceValue(id) }}
 			.bottom
 				.media(
-					v-if='commonServices.length > 0'
-					v-for='(service, i) in commonServices')
+					v-if='commonTypes.length > 0'
+					v-for='({ id, name, icon }, i) in commonTypes'
+					:class='{ single: serviceValue(id).length == 0 }')
 					.media-left
 						.wrapper(
-							:style='`background: ${service && service.icon_background ? service.icon_background : service && service.icon.includes("_dark") ? "#101828" : ""}`')
+							:style='`background: ${tariff.commonIcons[id].background ? tariff.commonIcons[id].background : tariff.commonIcons[id].icon.includes("_dark") ? "#101828" : ""}`')
 							img(
-								:src='service ? service.icon : "https://dummyimage.com/80x80/000000/fff.png&text=icon"')
+								:src='tariff.commonIcons[id].icon')
 					.media-content
 						.content
-							h5 {{ service ? service.title : result[i] }}
-							p.is-borderless(
-								v-if='service'
-								v-html='service.value')
+							h5 {{ name }}
+							p.is-inline( v-if='serviceValue(id).length > 0' ) {{ serviceValue(id) }}
 				.price(v-if='tariff.price')
 					.value {{ tariff.price }} 
 					.units
 						span {{ units[0] }}
 						span(v-if='units.length > 0') {{ units[1] }}
 				.button(
-					:style='`background: ${tariff.buttonColor}; border-color: ${tariff.buttonColor}; color: ${tariff.buttonFontColor == 0 ? "#363636" : "#fff"};`') Подключить
-				//- pre {{ commonServices }}
+					:style='`background: ${tariff.buttonColor}; border-color: ${tariff.buttonColor}; color: ${tariff.buttonFontColor == 0 ? "#363636" : "#fff"};`') {{ tariff.buttonText }}
 </template>
 
 <script>
@@ -52,58 +57,60 @@ export default {
 	name: "TariffPreview",
 	data() {
 		return {
-			result: ['Домашний интернет', 'Телевидение', 'Мобильная связь', 'Доп. опции', 'Оборудование']
+			commonTypes: []
 		}
 	},
-	props: ['tariff'],
+	props: ['tariff', 'types'],
+	watch: {
+		tariff: {
+			handler() {
+				if (this.tariff.flagText) {
+					setTimeout(() => {
+						let flag = document.querySelector('#flag')
+						document.querySelector('#title').style.paddingRight = `${flag.offsetWidth - 30}px`
+					}, 100)
+				}
+				if (this.tariff.services.length > 0) {
+					let services = this.tariff.services,
+					types = this.types.map(item => item.id)
+
+					services = services.filter(item => !types.includes(item.type) && item.common)
+
+					let ids = services.map(item => item.type)
+					if (ids.length > 0) {
+						ids = ids.join(',')
+
+						this.$getSTypes({ ids })
+							.then(({ types }) => this.commonTypes = types)
+					}
+				} else {
+					this.commonTypes = []
+				}
+			},
+			deep: true
+		}
+	},
 	computed: {
 		units() {
 			let { units } = this.tariff
 			units = units.split("/")
 			return units
-		},
-		services() {
-			let tariffServices = this.tariff.services
-			if (tariffServices.length > 0) {
-				let services = tariffServices.filter(item => item.type < 3 && item.main)
-				let result = []
-				services = services.map(item => {
-					result[item.type] = {
-						title: this.result[item.type],
-						icon: result[item.type] && result[item.type].icon ? result[item.type].icon : item.icon,
-						icon_background: result[item.type] && result[item.type].icon_background ? result[item.type].icon_background : item.icon_background,
-						value: result[item.type] && result[item.type].value ? `${result[item.type].value}, ${item.value}` : item.value
-					}
-				})
-				return result
+		}
+	},
+	methods: {
+		serviceValue(id) {
+			let services = this.tariff.services,
+					result = ''
+			services = services.filter(item => item.type == id)
+			if (services.length > 0) {
+				for (let service of services) {
+					if (result.length == 0) 
+						result = service.value
+					else
+						result += `, ${service.value}`
+				}
 			}
-			return []
-		},
-		commonServices() {
-			let tariffServices = this.tariff.services
-			if (tariffServices.length > 0) {
-				let services = tariffServices.filter(item => item.type >= 3 && item.main)
-				let result = []
-				services = services.map(item => {
-					if (item.type !== 5) {
-						result[item.type] = {
-							title: result[item.type] ? result[item.type].title : this.result[item.type],
-							icon: result[item.type] && result[item.type].icon ? result[item.type].icon : item.icon,
-							icon_background: result[item.type] && result[item.type].icon_background ? result[item.type].icon_background : item.icon_background,
-							value: result[item.type] && result[item.type].value ? `${result[item.type].value}${item.name}, +${item.price}${item.units}<br>` : `${item.name}, +${item.price}${item.units}<br>`
-						}
-					} else {
-						result.push({
-							title: item.customType,
-							icon: item.icon,
-							icon_background: item.icon_background,
-							value: `+${item.price}${item.units}`
-						})
-					}
-				})
-				result = result.filter(item => item)
-				return result
-			}
+			return result
 		}
 	}
 }
@@ -115,17 +122,39 @@ code {
 	display: block;
 	padding: .5rem;
 	.box {
-		max-width: 25rem;
+		max-width: 22rem;
 		margin: 0 auto;
 		padding: 0;
-		overflow: hidden;
 		.head {
 			padding: 1.25rem;
 			border-bottom: 1px solid rgba($grey, .2);
+			position: relative;
 			&.light {
 				* {
 					color: #fff!important;
 					border-color: rgba(255, 255, 255, .3)!important;
+				}
+			}
+			.content {
+				h3 {
+					font-size: 1.25rem;
+				}
+			}
+			.flag {
+				font-size: .75rem;
+				padding: .1rem 1rem;
+				position: absolute;
+				right: -12px;
+				top: 1.25rem;
+				&::before {
+					display: block;
+					content: "";
+					border-style: solid;
+					border-width: 12px 12px 0 0;
+					border-color: #273a64 transparent transparent transparent;
+					position: absolute;
+					top: 100%;
+					right: 0;
 				}
 			}
 		}
@@ -158,6 +187,14 @@ code {
 			}
 		}
 		.media {
+			&.single {
+				@include flex(center, flex-start);
+				.media-content {
+					h5 {
+						margin-bottom: 0;
+					}
+				}
+			}
 			.media-left {
 				.wrapper {
 					width: 3rem;

@@ -1,7 +1,7 @@
 <template lang="pug">
 #tariffs_packages
 	TopLine(
-		title="Пакеты")
+		title="Группы тарифов")
 	.tile.is-ancestor
 		.tile.is-vertical
 			.tile.is-parent
@@ -15,9 +15,13 @@
 								size="is-small"
 								type="is-primary")
 			.tile.is-parent
-				.tile.is-child.box
+				.tile.is-child.box( v-if='packages && packages.length > 0' )
 					TablePackages(
-						:packages='packages')
+						:packages='packages'
+						@update='getPackages')
+				.tile.is-child.box.is-info( v-else )
+					.content
+						h2.is-marginless.has-text-centered Типы тарифов не найдены
 </template>
 
 <script>
@@ -27,6 +31,11 @@ export default {
 		let { packages } = await $getPackages()
 
 		return { packages }
+	},
+	methods: {
+		getPackages() {
+			this.$getPackages()
+		}
 	}
 }
 </script>

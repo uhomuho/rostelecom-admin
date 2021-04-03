@@ -2,17 +2,12 @@
 	.menu {
 		.menu-list {
 			li {
-				&.active {
-					a {
-						background: #282c33;
-						color: #fff;
-					}
-				}
 				a {
 					color: #727c8f;
 					padding: .75rem 1.5rem;
 					border-radius: 0;
 					&.nuxt-link-exact-active,
+					&.nuxt-link-active,
 					&:hover {
 						background: #282c33;
 						color: #fff;

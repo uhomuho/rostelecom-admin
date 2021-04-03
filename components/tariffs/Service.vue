@@ -15,10 +15,18 @@ b-modal(
 					v-model='service.value')
 			hr
 			b-field(
-				label="Описание")
-				b-input(
-					type="textarea"
-					v-model='service.description')
+				label="Детали услуги")
+			b-field( 
+				v-for='(item, i) in service.description'
+				:key='i'
+				grouped )
+				.control.is-expanded
+					b-input(
+						v-model='service.description[i].title')
+				.control.is-expanded
+					.button.is-danger( @click='service.description.splice(i, 1)' ) Убрать
+			b-field
+				.button.is-success(@click='service.description.push({ title: null })') Добавить
 			hr
 			b-field(
 				label="Цена")
@@ -29,47 +37,18 @@ b-modal(
 					v-model='service.units')
 			hr
 			b-field(
-				:label="`Является основной услугой '${ service.type !== 4 ? $getType(service.type) : service.customType }' в тарифе '${ tariff.name }'`")
-				b-checkbox(
-					v-model='service.main') {{ service.main ? "Да" : "Нет" }}
+				v-if='service.connectionType'
+				label="Технология подключения")
+				b-select(v-model='service.connectionType')
+					option(value="xPON")  xPON
+					option(value="FTTx")  FTTx
+					option(value="xDSL")  xDSL
+			hr
 			b-field(
 				v-if='!service.main'
 				label="Отображать услугу на карточке тарифа?")
 				b-checkbox(
 					v-model='service.common') {{ service.common ? "Да" : "Нет" }}
-			hr
-			b-field(
-				grouped)
-				template(#label)
-					|Цвет иконки&nbsp;
-					b-tooltip(
-						type="is-dark" 
-						label="Фон для светлой иконки добавлен только для видимости"
-						position="is-right"
-						multilined)
-						b-icon(
-							size="is-small" 
-							icon="question-circle")
-				.control.is-flex
-					b-switch(
-						v-model='service.icon'
-						:true-value='service.icon.replace("_light", "_dark")'
-						:false-value='service.icon.replace("_dark", "_light")')
-						|{{ service.icon.includes("_dark") ? "Светлая" : "Тёмная" }}
-				.control
-					.icon(
-						:class='{ dark: service.icon.includes("_dark") }'
-						:style='`background: ${service.icon_background}`')
-						img(
-							:src='service.icon')
-			b-field(
-				label="Фон иконки")
-				v-swatches(
-					:swatches='$swatches()'
-					v-model='service.icon_background'
-					show-fallback
-					fallback-input-type="color"
-					popover-x="right")
 			hr
 			b-field(
 				grouped)

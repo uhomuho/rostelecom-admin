@@ -16,6 +16,14 @@
 	}
 }
 
+a {
+	&.box {
+		&:hover {
+			box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0px 0 1px rgb(10 10 10 / 2%)!important;
+		}
+	}
+}
+
 .b-table {
 	&.parent {
 		&>.table-wrapper {
@@ -143,6 +151,14 @@
 	}
 }
 
+.select {
+	&.is-multiple {
+		select {
+			height: 25rem;
+		}
+	}
+}
+
 .tag {
 	&.is-dark {
 		background: $dark;
@@ -151,6 +167,14 @@
 				.fas {
 					color: $danger;
 				}
+			}
+			&.has-text-warning {
+				.fas {
+					color: $warning;
+				}
+			}
+			&:focus {
+				outline: none;
 			}
 		}
 	}
@@ -225,6 +249,18 @@ span {
 }
 
 .field {
+	.control {
+		&.padding-left {
+			padding-left: .5rem;
+		}
+		&.is-flex {
+			@include flex();
+			span {
+				display: inline-block;
+				padding-right: 1rem;
+			}
+		}
+	}
 	&.bordered {
 		.control {
 			padding-right: 1rem;
@@ -232,6 +268,34 @@ span {
 			&+.control {
 				border-left: 1px solid $light;
 				padding-left: 1rem;
+			}
+		}
+	}
+	&.is-grouped {
+		.control {
+			&.is-expanded {
+				flex: 1.5;
+				&.is-2 {
+					flex: 2;
+				}
+			}
+		}
+	}
+	.collapse {
+		&.card {
+			box-shadow: unset;
+		}
+		.collapse-content {
+			padding-top: 1rem;
+		}
+	}
+	.label {
+		.tag {
+			margin-left: .25rem;
+			cursor: pointer;
+			&:hover {
+				opacity: .8;
+				text-decoration: underline;
 			}
 		}
 	}

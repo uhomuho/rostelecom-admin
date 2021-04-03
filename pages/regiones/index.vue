@@ -29,6 +29,7 @@ export default {
 	},
 	async asyncData({ $getAreas }) {
 		let { areas } = await $getAreas()
+		
 		return { areas }
 	},
 	methods: {
@@ -44,6 +45,7 @@ export default {
 		getDistricts({ query, id }) {
 			this.$getAreas(query)
 				.then(({ areas }) => {
+					console.log(areas)
 					this.$set(this.nestedAreas, id, areas)
 				})
 		}

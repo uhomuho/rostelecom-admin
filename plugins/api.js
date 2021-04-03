@@ -1,17 +1,13 @@
 export default ({ $axios, isDev, $encodeData, $decodeData, $Snackbar }) => {
 	$axios.interceptors.request.use(async config => {
-		if (!isDev) {
-			config.data = config.data ? { data: await $encodeData(config.data) } : null
-		}
+		config.data = config.data && Object.keys(config.data).length > 0 ? { data: await $encodeData(config.data) } : config.data
     return config
   }, err => {
     return Promise.reject(err)
   })
 
 	$axios.interceptors.response.use(async res => {
-		if (!isDev) {
-			res.data = await $decodeData(res.data)
-		}
+		res.data = await $decodeData(res.data)
     return res
   }, err => {
     return Promise.reject(err)

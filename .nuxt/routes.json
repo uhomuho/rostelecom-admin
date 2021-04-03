@@ -1,5 +1,12 @@
 [
   {
+    "name": "channels",
+    "path": "/channels",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/channels/index.vue",
+    "chunkName": "pages/channels/index",
+    "_name": "_0904256e"
+  },
+  {
     "name": "packages",
     "path": "/packages",
     "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/packages/index.vue",
@@ -28,6 +35,13 @@
     "_name": "_22376147"
   },
   {
+    "name": "types",
+    "path": "/types",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/types/index.vue",
+    "chunkName": "pages/types/index",
+    "_name": "_e37b369e"
+  },
+  {
     "name": "packages-create",
     "path": "/packages/create",
     "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/packages/create/index.vue",
@@ -35,11 +49,39 @@
     "_name": "_e7674bd4"
   },
   {
+    "name": "regiones-edit",
+    "path": "/regiones/edit",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/regiones/edit/index.vue",
+    "chunkName": "pages/regiones/edit/index",
+    "_name": "_9834a1e2"
+  },
+  {
     "name": "tariffs-add",
     "path": "/tariffs/add",
     "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/tariffs/add/index.vue",
     "chunkName": "pages/tariffs/add/index",
     "_name": "_92235a4e"
+  },
+  {
+    "name": "types-services",
+    "path": "/types/services",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/types/services/index.vue",
+    "chunkName": "pages/types/services/index",
+    "_name": "_4dd210dc"
+  },
+  {
+    "name": "types-tariffs",
+    "path": "/types/tariffs",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/types/tariffs/index.vue",
+    "chunkName": "pages/types/tariffs/index",
+    "_name": "_e20b311e"
+  },
+  {
+    "name": "regiones-edit-id",
+    "path": "/regiones/edit/:id",
+    "component": "/home/uhomuho/projects/rostelecom/rostelecom-admin/pages/regiones/edit/_id/index.vue",
+    "chunkName": "pages/regiones/edit/_id/index",
+    "_name": "_5322aa7a"
   },
   {
     "name": "packages-id",

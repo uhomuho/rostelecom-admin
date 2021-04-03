@@ -1,4 +1,4 @@
-export default ({ $axios, $Snackbar }, inject) => {
+export default ({ $axios, $Snackbar, $query }, inject) => {
 	inject('createPackage', data => {
 		return $axios.post('/packages/create', { package: data })
 			.then(({ data }) => {
@@ -6,8 +6,11 @@ export default ({ $axios, $Snackbar }, inject) => {
 				return true
 			})
 	})
-	inject('getPackages', query => {
-		return $axios.get('/packages')
+	inject('getPackages', params => {
+		return $axios.get(`/packages?${$query(params)}`)
 			.then(res => res.data)
+	})
+	inject('removePackage', id => {
+		return $axios.delete(`/packages/${id}`)
 	})
 }

@@ -14,6 +14,18 @@
 			label="Название"
 			v-slot="props")
 			p {{ props.row.name }}
+		b-table-column(
+			field="remove"
+			v-slot='props')
+			b-tag(
+				type="is-primary"
+				close-type='is-dark'
+				close-icon-type='is-danger'
+				attached
+				closable
+				close-icon='trash'
+				aria-close-label="Close tag"
+				@close="removePackage(props.row.id)") Удалить
 		template(
 			#detail="props")
 			.tariffs
@@ -26,6 +38,12 @@
 <script>
 export default {
 	name: "TablePackages",
-	props: ['packages']
+	props: ['packages'],
+	methods: {
+		removePackage(id) {
+			this.$removePackage(id)
+				.then(() => this.$emit('update'))
+		}
+	}
 }
 </script>

@@ -1,5 +1,7 @@
 export default {
 	port: 9000,
+	target: 'server',
+	ssr: true,
 	loading: {
 		color: "#70f",
 	},
@@ -63,7 +65,7 @@ export default {
 	],
 
 	axios: {
-		baseURL: process.env.BACKEND || 'http://localhost:8082'
+		baseURL: process.env.NODE_ENV !== 'production' ? 'http://localhost:8082' : 'https://rt-api.rt-provider.ru'
 	},
 
 	css: [

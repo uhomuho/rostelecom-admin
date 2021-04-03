@@ -15,10 +15,13 @@
 								size="is-small"
 								type="is-primary")
 			.tile.is-parent
-				.tile.is-child.box.is-light
+				.tile.is-child.box.is-light( v-if='tariffs && tariffs.length > 0' )
 					TableTariffs(
-						:tariffs='tariffs')
-					//- pre {{ tariffs }}
+						:tariffs='tariffs'
+						@update='get')
+				.tile.is-child.box.is-info( v-else )
+					.content
+						h2.is-marginless.has-text-centered Тарифы не найдены
 </template>
 
 <script>
@@ -28,6 +31,12 @@ export default {
 		let { tariffs } = await $getTariffs()
 
 		return { tariffs }
+	},
+	methods: {
+		get() {
+			this.$getTariffs()
+				.then(({ tariffs }) => this.tariffs = tariffs)
+		}
 	}
 }
 </script>

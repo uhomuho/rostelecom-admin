@@ -7,7 +7,10 @@
 			.tile.is-parent
 				.tile.is-child.box
 					AddService(
-						@added='getServices')
+						v-if='channels'
+						@update='getServices'
+						:types='types'
+						:channels='channels')
 			.tile.is-parent
 				.tile.is-child.box
 					.content
@@ -17,6 +20,7 @@
 					v-if='services && services.length > 0')
 					TableServices(
 						:services='services'
+						:types='compTypes'
 						@updateServices='getServices')
 				.tile.is-child.box.is-info(
 					v-else)
@@ -27,9 +31,24 @@
 <script>
 export default {
 	name: "Services",
-	async asyncData({ $getServices }) {
-		let { services } = await $getServices()
-		return { services }
+	async asyncData({ $getServices, $getSTypes, $getChannels }) {
+		let { services } = await $getServices(),
+				{ types } = await $getSTypes(),
+				{ channels } = await $getChannels()
+
+		return { services, types, channels }
+	},
+	computed: {
+		compTypes() {
+			let result = {},
+					types = this.types
+			if (types) {
+				for (let type of types) {
+					result[type.id] = type
+				}
+			}
+			return result
+		}
 	},
 	methods: {
 		getServices() {

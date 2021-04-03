@@ -7,7 +7,6 @@
 				:label='title')
 				b-menu-item(
 					v-for='({ name, to, icon }, i) in items'
-					:class='{ active: isCurrent(to) }'
 					:icon='icon'
 					:key='i'
 					:label='name'
@@ -32,6 +31,22 @@ export default {
 					]
 				},
 				{
+					title: 'Типы услуг и тарифов',
+					items: [
+						{
+							name: 'Типы услуг',
+							to: '/types/services',
+							icon: 'screwdriver'
+
+						},
+						{
+							name: 'Типы тарифов',
+							to: '/types/tariffs',
+							icon: 'wrench'
+						}
+					]
+				},
+				{
 					title: 'Тарификация',
 					items: [
 						{
@@ -40,23 +55,23 @@ export default {
 							icon: 'list'
 						},
 						{
+							name: 'ТВ Каналы',
+							to: '/channels',
+							icon: 'tv'
+						},
+						{
 							name: 'Тарифы',
 							to: '/tariffs',
 							icon: 'cube'
 						},
 						{
-							name: 'Пакеты тарифов',
+							name: 'Группы тарифов',
 							to: '/packages',
 							icon: 'cubes'
 						}
 					]
 				}
 			]
-		}
-	},
-	methods: {
-		isCurrent(route) {
-			return this.$route.fullPath.includes(route)
 		}
 	}
 }

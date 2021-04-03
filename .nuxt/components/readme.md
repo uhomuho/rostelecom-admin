@@ -6,12 +6,18 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<AddChannel>` | `<add-channel>` (components/add/Channel.vue)
 - `<AddCity>` | `<add-city>` (components/add/City.vue)
 - `<AddService>` | `<add-service>` (components/add/Service.vue)
+- `<AddServiceType>` | `<add-service-type>` (components/add/ServiceType.vue)
+- `<AddTariffType>` | `<add-tariff-type>` (components/add/TariffType.vue)
 - `<TableAreas>` | `<table-areas>` (components/tables/Areas.vue)
+- `<TableChannels>` | `<table-channels>` (components/tables/Channels.vue)
 - `<TablePackages>` | `<table-packages>` (components/tables/Packages.vue)
 - `<TableServices>` | `<table-services>` (components/tables/Services.vue)
+- `<TableServicesTypes>` | `<table-services-types>` (components/tables/ServicesTypes.vue)
 - `<TableTariffs>` | `<table-tariffs>` (components/tables/Tariffs.vue)
+- `<TableTariffsTypes>` | `<table-tariffs-types>` (components/tables/TariffsTypes.vue)
 - `<TariffsPreview>` | `<tariffs-preview>` (components/tariffs/Preview.vue)
 - `<TariffsService>` | `<tariffs-service>` (components/tariffs/Service.vue)
 - `<TariffsView>` | `<tariffs-view>` (components/tariffs/View.vue)
